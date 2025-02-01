@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Score App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Test Score App</h1>
+    <label for="score">Enter a test score:</label>
+    <input type="text" id="score">
+    <button onclick="addScore()">Add Score</button>
+    <button onclick="displayScores()">Display Scores</button>
+    <p id="message"></p>
+    <ul id="scoreList"></ul>
+    <script src="script.js"></script>
+</body>
+</html>
+
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 20px;
+}
+h1 {
+    color: #333;
+}
+button {
+    margin: 10px;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0056b3;
+}
+
+/* script.js */
+let scores = [];
+
+function addScore() {
+    let scoreInput = document.getElementById("score").value;
+    let message = document.getElementById("message");
+    if (!isNaN(scoreInput) && scoreInput !== "") {
+        scores.push(Number(scoreInput));
+        message.textContent = "Score added successfully!";
+        document.getElementById("score").value = "";
+    } else {
+        message.textContent = "Please enter a valid number.";
+    }
+}
+
+function displayScores() {
+    let scoreList = document.getElementById("scoreList");
+    scoreList.innerHTML = "";
+    scores.forEach(score => {
+        let li = document.createElement("li");
+        li.textContent = score;
+        scoreList.appendChild(li);
+    });
+}
